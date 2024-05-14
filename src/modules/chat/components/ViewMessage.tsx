@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import socket from "../../../libs/socket";
 import { Message } from "../../../types/types";
 import { useSelector } from "react-redux";

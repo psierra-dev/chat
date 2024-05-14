@@ -1,4 +1,3 @@
-import React from "react";
 import FormAuth from "../modules/auth/components/FormAuth";
 
 const PageAuth = () => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { User } from "../../../types/types";
 import Avatar from "../../common/components/Avatar";
 import Status from "../../common/components/Status";

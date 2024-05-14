@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchUser from "./SearchUser";
 import ListUser from "./ListUser";
 import { BiBrightnessHalf, BiLogOut } from "react-icons/bi";

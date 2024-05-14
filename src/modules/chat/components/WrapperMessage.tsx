@@ -1,5 +1,3 @@
-import React from "react";
-
 const WrapperMessage = () => {
   return (
     <div className="p-4 flex flex-col flex-1 overflow-auto">
