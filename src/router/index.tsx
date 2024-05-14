@@ -7,11 +7,11 @@ import IndexChat from "../modules/chat/components/IndexChat";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <PageAuth />,
+    element: <PageChat />,
   },
   {
     path: "chat/",
-    element: <PageChat />,
+    element: <PageAuth />,
     errorElement: <p>Error</p>,
     children: [
       {
