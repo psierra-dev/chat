@@ -5,7 +5,7 @@ const SearchUser = () => {
     <Input
       name=""
       label_text=""
-      onChange={(e) => null}
+      onChange={(e) => console.log(e)}
       icon="search"
       placeholder="Buscar usuario..."
     />

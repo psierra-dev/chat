@@ -87,6 +87,7 @@ const WrapperUsers = ({ users }: { users: User[] }) => {
       console.log(users, "allusers");
       setAllUsers(users);
     });
+    console.log(allUsers);
 
     /*return () => {
       socket.off("allusers", (users) => {

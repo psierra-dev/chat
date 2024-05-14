@@ -1,13 +1,7 @@
-import { useEffect } from "react";
-import socket from "./libs/socket";
 import { RouterProvider } from "react-router-dom";
-import router from "./router/index.jsx";
-import { useDispatch } from "react-redux";
-import { setUser } from "./store/slices/userSlice";
+import router from "./router/index.tsx";
 
 function App() {
-  const dispatch = useDispatch();
-
   /*useEffect(() => {
     socket.on("myuser", (user) => {
       console.log(user, "user");

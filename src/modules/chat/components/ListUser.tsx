@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { User } from "../../../types/types";
 import { Link } from "react-router-dom";
 import Avatar from "../../common/components/Avatar";

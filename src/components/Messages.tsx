@@ -9,7 +9,10 @@ const Messages = () => {
   const onSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!message) return;
-    setListMessage([...listMessage, { username: "yp", msg: message }]);
+    setListMessage([
+      ...listMessage,
+      { username: "yp", msg: message, from: "", to: "" },
+    ]);
     socket.emit("chat message", message);
     setMessage("");
   };
