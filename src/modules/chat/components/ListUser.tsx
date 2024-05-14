@@ -97,7 +97,7 @@ const ListUser = ({ users }: { users: User[] }) => {
       <ul className=" flex lg:flex-col gap-1">
         {users?.map((u) => (
           <li key={u.id}>
-            <Link to={`/chat/${u.username}`}>
+            <Link to={`/${u.username}`}>
               <CardUser user={u} />
             </Link>
           </li>
