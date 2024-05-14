@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import PageAuth from "../pages/PageAuth";
+//import PageAuth from "../pages/PageAuth";
 import PageChat from "../pages/PageChat";
 import PageChatUser from "../pages/PageChatUser";
 import IndexChat from "../modules/chat/components/IndexChat";
