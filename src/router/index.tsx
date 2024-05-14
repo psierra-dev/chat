@@ -8,10 +8,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <PageChat />,
-  },
-  {
-    path: "chat/",
-    element: <PageAuth />,
     errorElement: <p>Error</p>,
     children: [
       {
