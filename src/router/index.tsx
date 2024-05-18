@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import PageChat from "../pages/PageChat";
 import PageChatUser from "../pages/PageChatUser";
 import IndexChat from "../modules/chat/components/IndexChat";
+import PageUsers from "../pages/PageUsers";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         element: <PageChatUser />,
       },
     ],
+  },
+  {
+    path: "/users",
+    element: <PageUsers />,
   },
 ]);
 

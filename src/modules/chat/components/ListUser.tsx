@@ -75,11 +75,16 @@ import Status from "../../common/components/Status";
 ];*/
 
 const CardUser = ({ user }: { user: User }) => {
+  const selected = "Pablo";
   return (
-    <div className=" flex justify-between items-center hover:bg-neutral-100 hover:cursor-pointer p-2 rounded-lg">
+    <div
+      className={`flex justify-between items-center ${
+        selected === user.username ? "text-blue-700" : "text-neutral-700"
+      } hover:bg-neutral-100 hover:cursor-pointer p-2 rounded-lg`}
+    >
       <div className="flex items-center">
         <Avatar username={user.username} />
-        <p className="mx-1 md:mx-2 text-xs md:text-sm text-neutral-700 font-medium">
+        <p className={`mx-1 md:mx-2 text-xs md:text-sm  font-medium`}>
           {user.username}
         </p>
       </div>

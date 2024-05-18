@@ -1,9 +1,7 @@
-import { Outlet } from "react-router-dom";
-
-import WrapperUsers from "../modules/chat/components/WrapperUsers";
 import Header from "../modules/common/components/Header";
-import ControlPanel from "../modules/common/components/ControlPanel";
-
+import WrapperCategory from "../modules/user/components/WrapperCategory";
+import FilterableUserList from "../modules/user/components/FilterableUserList";
+import InfoUser from "../modules/user/components/InfoUser";
 const users = [
   {
     id: 1,
@@ -52,24 +50,25 @@ const users = [
   },
 ];
 
-const PageChat = () => {
+const PageUsers = () => {
   return (
     <div className=" w-screen h-screen p-4 flex flex-col px-2 md:px-20 lg:px-32">
       <Header />
       <div className=" w-full h-full pt-8 flex flex-col flex-1 lg:flex-row gap-2 md:gap-4">
         <aside className="flex flex-col bg-neutral-100 rounded-2xl">
-          <div className=" p-3 md:p-4 flex flex-col flex-1 w-full md:min-w-[350px] overflow-auto">
-            <WrapperUsers users={users} />
-            <ControlPanel />
+          <div className=" p-3 md:p-4 flex  flex-1 w-full lg:max-w-[350px]">
+            <WrapperCategory interests={users[0].interests} />
           </div>
         </aside>
-
-        <main className="flex flex-col flex-1 bg-neutral-100 rounded-2xl">
-          <Outlet />
+        <main className="flex flex-col lg:flex-row flex-1 bg-neutral-100 rounded-2xl overflow-auto">
+          <FilterableUserList users={users} />
+          <section className=" hidden lg:flex w-[40%] p-2 md:p-4 border-l-2">
+            <InfoUser />
+          </section>
         </main>
       </div>
     </div>
   );
 };
 
-export default PageChat;
+export default PageUsers;
