@@ -29,11 +29,11 @@ const FormAuth = () => {
     setStatus("success");
     navigate("/chat");
 
-    /*socket.on("connect_error", (e) => {
+    socket.on("connect_error", (e) => {
       console.log("error", e.message);
       setStatus("error");
       setError(e.message);
-    });*/
+    });
 
     /*socket.on('user already exists' , (data) => {
       if(data) {
