@@ -2,8 +2,12 @@ import { BiFilter } from "react-icons/bi";
 
 import ListCategory from "./ListCategory";
 import Chip from "../../common/components/Chip";
+import { useSelector } from "../../../hooks/useSelector";
 
-const WrapperCategory = ({ interests }: { interests: string[] }) => {
+const WrapperCategory = () => {
+  const current_user = useSelector((state) => state.user.value.currentUser);
+  const user_interests = current_user?.interests;
+
   return (
     <div className="flex flex-col w-full">
       <div className=" mb-2">
@@ -11,7 +15,7 @@ const WrapperCategory = ({ interests }: { interests: string[] }) => {
       </div>
       <div className=" w-full flex items-center gap-2">
         <div className="w-full h-12 flex gap-1 px-2 items-center shadow-inner rounded-md">
-          {interests?.map((interest) => (
+          {user_interests?.map((interest) => (
             <Chip key={interest} text={interest} isActive />
           ))}
         </div>

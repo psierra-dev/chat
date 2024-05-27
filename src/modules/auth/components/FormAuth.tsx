@@ -3,27 +3,37 @@ import { useNavigate } from "react-router-dom";
 import socket from "../../../libs/socket";
 import Input from "../../common/components/Input";
 import { BiLoader } from "react-icons/bi";
+import interests from "../../../consts/interests.json";
+import Chip from "../../common/components/Chip";
 
 type Status = "typing" | "loading" | "success" | "error";
 const FormAuth = () => {
-  const [username, setUsername] = useState("");
+  const [data, setData] = useState({
+    username: "",
+    biography: "",
+    interests: [] as string[],
+  });
+
   const [status, setStatus] = useState<Status>("typing");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   function handleSubmitUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!username) return;
+    if (!data.username || data.interests.length === 0) return;
     setStatus("loading");
 
-    socket.auth = { username };
+    socket.auth = data;
     socket.connect();
 
-    socket.on("connect_error", (e) => {
+    setStatus("success");
+    navigate("/chat");
+
+    /*socket.on("connect_error", (e) => {
       console.log("error", e.message);
       setStatus("error");
       setError(e.message);
-    });
+    });*/
 
     /*socket.on('user already exists' , (data) => {
       if(data) {
@@ -31,11 +41,11 @@ const FormAuth = () => {
       }
     })*/
 
-    socket.on("connect", () => {
+    /*socket.on("connect", () => {
       console.log("connected");
       setStatus("success");
       navigate("/chat");
-    });
+    });*/
   }
 
   return (
@@ -47,9 +57,57 @@ const FormAuth = () => {
         <Input
           name="username"
           label_text="Username"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setData({ ...data, username: e.target.value })}
           icon="user"
         />
+        <div className=" flex flex-col">
+          <label className="text-sm  text-neutral-900">Bio</label>
+          <textarea
+            name="biography"
+            onChange={(e) => setData({ ...data, biography: e.target.value })}
+          ></textarea>
+        </div>
+
+        <div className="flex flex-col">
+          <div className="mb-2">
+            <h5 className="text-sm  text-neutral-900">Intereses</h5>
+            <p className=" text-xs font-semibold text-neutral-600">
+              Elija como maximo 4 interes.
+            </p>
+          </div>
+          <div className=" flex flex-wrap gap-1">
+            {interests.map((interest) => (
+              <div
+                key={interest}
+                className="w-fit h-fit cursor-pointer"
+                onClick={() => {
+                  let user_interest = data.interests;
+                  if (data.interests.includes(interest)) {
+                    user_interest = user_interest.filter(
+                      (int) => int !== interest
+                    );
+                  } else {
+                    if (user_interest.length < 4) {
+                      user_interest = [...user_interest, interest];
+                    } else {
+                      return;
+                    }
+                  }
+
+                  setData({
+                    ...data,
+                    interests: user_interest,
+                  });
+                }}
+              >
+                <Chip
+                  text={interest}
+                  isActive={data.interests.includes(interest)}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="flex gap-2">
           <input type="checkbox" name="" id="" />

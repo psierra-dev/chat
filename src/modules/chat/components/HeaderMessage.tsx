@@ -7,9 +7,9 @@ const HeaderMessage = ({ user }: { user: User }) => {
   return (
     <header className="flex justify-between rounded-t-xl items-center w-full p-3 bg-blue-500">
       <div className="flex items-center">
-        <Avatar username={user.username} />
+        <Avatar username={user?.username} />
         <p className="mx-2 text-sm text-neutral-100 font-medium">
-          {user.username}
+          {user?.username}
         </p>
 
         <Status isOnline={false} />

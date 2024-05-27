@@ -10,9 +10,9 @@ export interface User {
 }
 
 export interface Message {
-    username?: string,
-    msg: string,
-    from: string,
-    to: string,
-    id?: string
+    message: string,
+    sender?: User | string,
+    toId?: string  | number,
+    fromId?: string  | number,
+    self: boolean
 }

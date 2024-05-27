@@ -3,10 +3,11 @@ const Avatar = ({
   size = "sm",
 }: {
   username: string;
-  size?: "sm" | "md";
+  size?: "xs" | "sm" | "md";
 }) => {
-  const firstLetter = username[0];
-  const size_circle: { sm: string; md: string } = {
+  const firstLetter = username ? username[0] : "_";
+  const size_circle: { xs: string; sm: string; md: string } = {
+    xs: "text-xs md:text-sm w-8 h-8",
     sm: "text-sm md:text-base w-10 h-10",
     md: "text-base md:text-lg lg:text-xl w-16 h-16",
   };

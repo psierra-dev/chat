@@ -1,27 +1,39 @@
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+
+import socket from "../libs/socket";
+import { useSelector } from "../hooks/useSelector";
+import { addMessage } from "../store/slices/chatSlice";
+
+import { Message, User } from "../types/types";
 
 import HeaderMessage from "../modules/chat/components/HeaderMessage";
 import InputMessage from "../modules/chat/components/InputMessage";
 import ViewMessage from "../modules/chat/components/ViewMessage";
 
-const user = {
-  id: 1,
-  username: "usuario1",
-  interests: ["Leer", "Fútbol", "Cine"],
-  like: 45,
-  dislike: 10,
-  biography:
-    "Apasionado de la lectura y el fútbol, disfruta de las buenas películas los fines de semana.",
-};
 const PageChatUser = () => {
-  const { userId } = useParams();
+  const { username } = useParams();
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.chat.value.chatUsers);
+  const user = users.filter((u) => u.username === username);
+  const messages = user[0].messages;
 
-  console.log(userId, "usersId");
+  const onSendMessage = (message: string) => {
+    const newMessge: Message = {
+      sender: "my",
+      message,
+      toId: user[0]?.id,
+      self: true,
+    };
+    dispatch(addMessage(newMessge));
+    socket.emit("message:private", newMessge);
+  };
+
   return (
     <div className="flex flex-col flex-1 rounded-md bg-neutral-100 overflow-auto">
-      <HeaderMessage user={user} />
-      <ViewMessage />
-      <InputMessage />
+      <HeaderMessage user={user[0] as User} />
+      <ViewMessage messages={messages} />
+      <InputMessage onSendMessage={onSendMessage} />
     </div>
   );
 };

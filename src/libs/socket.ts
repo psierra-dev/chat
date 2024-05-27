@@ -9,12 +9,19 @@ interface ServerToClientEvents {
     'chat message': (msg: Message) => void;
     myuser: (user: User) => void
     allusers: (user: User[]) => void;
+    'message:private': ( message: Message ) => void;
+    'user:connected': (user: User) => void
+    'user:all': (users: User[]) => void
+    
   }
   
   interface ClientToServerEvents {
     hello: () => void;
     'chat message': (msg: string) => void;
     message: (msg: Message) => void;
+    'get users filtered': (interests: string[], callback: (users: User[]) => void) => void;
+    'user:search': (username: string, callback: (user: User) => void) => void;
+    'message:private': ( message: Message ) => void;
   }
 
 const URL = 'http://localhost:3000/'

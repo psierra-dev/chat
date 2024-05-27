@@ -1,13 +1,25 @@
+import { useSelector } from "../../../hooks/useSelector";
 import { User } from "../../../types/types";
 import Input from "../../common/components/Input";
 import ListUser from "./ListUser";
 
-const FilterableUserList = ({ users }: { users: User[] }) => {
+const FilterableUserList = () => {
+  const users = useSelector((state) => state.listUsers.value.users);
+  const currentUser = useSelector((state) => state.user.value.currentUser);
+
+  const filteredUser = users?.filter((u) => {
+    for (const interest of currentUser.interests) {
+      if (u.interests?.includes(interest)) {
+        return true;
+      }
+    }
+  });
+
   return (
     <section className=" flex flex-col p-2 md:p-4 flex-1 overflow-auto">
       <Input name="" icon="search" label_text="" onChange={() => null} />
 
-      <ListUser users={users} />
+      <ListUser users={filteredUser as User[]} />
     </section>
   );
 };
