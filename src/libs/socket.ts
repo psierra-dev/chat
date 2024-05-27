@@ -24,8 +24,9 @@ interface ServerToClientEvents {
     'message:private': ( message: Message ) => void;
   }
 
-const URL = 'http://localhost:3000/'
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:3000/";
 
-const socket:  Socket<ServerToClientEvents, ClientToServerEvents> = io(URL, { autoConnect: false })
+  console.log(apiUrl, 'apiUrl')
+const socket:  Socket<ServerToClientEvents, ClientToServerEvents> = io(apiUrl, { autoConnect: false })
 
 export default socket
