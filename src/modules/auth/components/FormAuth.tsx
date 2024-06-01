@@ -5,7 +5,7 @@ import Input from "../../common/components/Input";
 import { BiLoader } from "react-icons/bi";
 import interests from "../../../consts/interests.json";
 import Chip from "../../common/components/Chip";
-
+const apiUrl = import.meta.env.VITE_APP_API_URL as string;
 type Status = "typing" | "loading" | "success" | "error";
 const FormAuth = () => {
   const [data, setData] = useState({
@@ -18,46 +18,53 @@ const FormAuth = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  function handleSubmitUser(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmitUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!data.username || data.interests.length === 0) return;
     setStatus("loading");
 
-    socket.auth = data;
-    socket.connect();
+    try {
+      const resp = await fetch(`${apiUrl}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    setStatus("success");
-    navigate("/chat");
-
-    socket.on("connect_error", (e) => {
-      console.log("error", e.message);
-      setStatus("error");
-      setError(e.message);
-    });
-
-    /*socket.on('user already exists' , (data) => {
-      if(data) {
-        setStatus('error')
+      console.log(resp);
+      if (resp.status === 200) {
+        socket.auth = data;
+        socket.connect();
+        setStatus("success");
+        navigate("/chat");
+      } else if (resp.status === 400) {
+        setStatus("error");
+        setError("Username en uso");
       }
-    })*/
-
-    /*socket.on("connect", () => {
-      console.log("connected");
-      setStatus("success");
-      navigate("/chat");
-    });*/
+    } catch (error) {
+      setStatus("error");
+      setError("Error");
+      console.log(error, "error");
+    }
   }
 
   return (
-    <div className="m-2 w-full max-w-[500px]">
-      <h4 className=" text-lg text-neutral-900 md:text-xl font-semibold">
-        Bienvenido/a
+    <div className=" w-full max-w-[500px] md:max-w-[600px]  md:border-[1px] border-neutral-300 rounded-r-lg p-3 md:p-6">
+      <h4 className=" text-center text-neutral-900 text-3xl md:text-4xl font-semibold font-sans">
+        FastChat
       </h4>
       <form onSubmit={handleSubmitUser} className=" flex flex-col gap-2 mt-4">
         <Input
           name="username"
           label_text="Username"
-          onChange={(e) => setData({ ...data, username: e.target.value })}
+          onChange={(e) => {
+            if (status === "error") {
+              setStatus("typing");
+              setError("");
+            }
+            setData({ ...data, username: e.target.value });
+          }}
           icon="user"
         />
         <div className=" flex flex-col">
@@ -65,6 +72,7 @@ const FormAuth = () => {
           <textarea
             name="biography"
             onChange={(e) => setData({ ...data, biography: e.target.value })}
+            className="w-full p-2 border-[1px] bg-neutral-100  text-neutral-800 text-base placeholder:text-sm md:placeholder:text-base rounded-md"
           ></textarea>
         </div>
 
@@ -72,7 +80,7 @@ const FormAuth = () => {
           <div className="mb-2">
             <h5 className="text-sm  text-neutral-900">Intereses</h5>
             <p className=" text-xs font-semibold text-neutral-600">
-              Elija como maximo 4 interes.
+              Elija como maximo 5 interes.
             </p>
           </div>
           <div className=" flex flex-wrap gap-1">
@@ -87,7 +95,7 @@ const FormAuth = () => {
                       (int) => int !== interest
                     );
                   } else {
-                    if (user_interest.length < 4) {
+                    if (user_interest.length < 5) {
                       user_interest = [...user_interest, interest];
                     } else {
                       return;
@@ -117,7 +125,7 @@ const FormAuth = () => {
         </div>
         <button
           disabled={status === "loading"}
-          className="w-full py-2 h-10 flex justify-center items-center mt-4 bg-blue-800 hover:bg-blue-950 text-white font-medium rounded-md disabled:bg-blue-700"
+          className="w-full py-2 h-10 flex justify-center items-center mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md disabled:bg-blue-500"
         >
           {status === "loading" ? (
             <span className=" animate-spin text-sm text-white">
@@ -127,7 +135,7 @@ const FormAuth = () => {
             "Entrar"
           )}
         </button>
-        {error && (
+        {status === "error" && error && (
           <span className=" text-sm font-semibold text-center text-red-500">
             {error}
           </span>

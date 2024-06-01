@@ -2,35 +2,55 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import socket from "../libs/socket";
-import { setCurrentUser } from "../store/slices/userSlice";
-import { addUser, setUsers } from "../store/slices/listUserSlice";
+
+import {
+  addMessageToUser,
+  addUser,
+  deleteUser,
+  setCurrentUser,
+  setUsers,
+  updateUser,
+} from "../store/slices/chatSlice";
+
 import Header from "../modules/common/components/Header";
-import { addMessage } from "../store/slices/chatSlice";
 
 const RootChat = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    socket.on("myuser", (user) => {
-      console.log(user, "---myuser");
+    socket.on("user:current", (user) => {
+      console.log(user, "---user:current");
       dispatch(setCurrentUser(user));
     });
 
+    socket.on("user:update", (user) => {
+      console.log(user, "---user:update");
+      dispatch(updateUser(user));
+    });
+
     socket.on("user:all", (users) => {
+      console.log("user:all", users);
       dispatch(setUsers(users));
     });
 
     socket.on("user:connected", (user) => {
+      console.log("user:connected", user);
       dispatch(addUser(user));
     });
 
+    socket.on("user:disconnected", (userId) => {
+      console.log("user:disconnected", userId);
+      dispatch(deleteUser(userId));
+    });
+
     socket.on("message:private", (message) => {
-      dispatch(addMessage(message));
+      dispatch(addMessageToUser(message));
     });
     return () => {
-      socket.off("myuser");
+      socket.off("user:current");
       socket.off("user:all");
       socket.off("user:connected");
+      socket.off("user:disconnected");
       socket.off("message:private");
     };
   }, [dispatch]);

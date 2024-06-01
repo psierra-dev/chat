@@ -1,6 +1,6 @@
 import WrapperCategory from "../modules/user/components/WrapperCategory";
 import FilterableUserList from "../modules/user/components/FilterableUserList";
-import InfoUser from "../modules/user/components/InfoUser";
+import WrapperInfoUser from "../modules/user/components/WrapperInfoUser";
 
 const PageUsers = () => {
   return (
@@ -13,7 +13,7 @@ const PageUsers = () => {
       <main className="flex flex-col lg:flex-row flex-1 bg-neutral-100 rounded-2xl overflow-auto">
         <FilterableUserList />
         <section className=" hidden lg:flex w-[40%] p-2 md:p-4 border-l-2">
-          <InfoUser />
+          <WrapperInfoUser />
         </section>
       </main>
     </div>

@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 
 import socket from "../libs/socket";
 import { useSelector } from "../hooks/useSelector";
-import { addMessage } from "../store/slices/chatSlice";
 
 import { Message, User } from "../types/types";
 
 import HeaderMessage from "../modules/chat/components/HeaderMessage";
 import InputMessage from "../modules/chat/components/InputMessage";
 import ViewMessage from "../modules/chat/components/ViewMessage";
+import { addMessageToUser } from "../store/slices/chatSlice";
 
 const PageChatUser = () => {
   const { username } = useParams();
@@ -25,12 +25,12 @@ const PageChatUser = () => {
       toId: user[0]?.id,
       self: true,
     };
-    dispatch(addMessage(newMessge));
+    dispatch(addMessageToUser(newMessge));
     socket.emit("message:private", newMessge);
   };
 
   return (
-    <div className="flex flex-col flex-1 rounded-md bg-neutral-100 overflow-auto">
+    <div className="flex flex-col flex-1 rounded-md  overflow-auto">
       <HeaderMessage user={user[0] as User} />
       <ViewMessage messages={messages} />
       <InputMessage onSendMessage={onSendMessage} />

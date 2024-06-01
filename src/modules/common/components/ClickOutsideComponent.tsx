@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 interface ClickOutsideComponentProps {
-  onClose: () => void;
+  onClose: (event: MouseEvent) => void;
   children: React.ReactNode;
 }
 
@@ -17,7 +17,7 @@ const ClickOutsideComponent: React.FC<ClickOutsideComponentProps> = ({
         componentRef.current &&
         !componentRef.current.contains(event.target as Node)
       ) {
-        onClose();
+        onClose(event);
       }
     };
 

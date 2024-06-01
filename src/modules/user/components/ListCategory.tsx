@@ -40,11 +40,9 @@ const interests = [
 
 const ItemInterest = ({ interest }: { interest: string }) => {
   const dispatch = useDispatch();
-  const user_interests = useSelector(
-    (state) => state.user.value.currentUser?.interests
-  );
+  const currentUser = useSelector((state) => state.chat.value.currentUser);
 
-  const isActive = user_interests.includes(interest);
+  const isActive = currentUser?.interests.includes(interest);
 
   const handeleupdateInterests = (interest: string) => {
     dispatch(updateInterests(interest));

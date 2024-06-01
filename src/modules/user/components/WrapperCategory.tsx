@@ -5,7 +5,7 @@ import Chip from "../../common/components/Chip";
 import { useSelector } from "../../../hooks/useSelector";
 
 const WrapperCategory = () => {
-  const current_user = useSelector((state) => state.user.value.currentUser);
+  const current_user = useSelector((state) => state.chat.value.currentUser);
   const user_interests = current_user?.interests;
 
   return (

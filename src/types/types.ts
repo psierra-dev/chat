@@ -4,9 +4,10 @@ export interface User {
     username: string,
     id: string | number,
     interests: Interest[],
-    like: number,
-    dislike: number,
-    biography: string
+    like: string[],
+    dislike: string[],
+    biography: string,
+    online?: boolean
 }
 
 export interface Message {

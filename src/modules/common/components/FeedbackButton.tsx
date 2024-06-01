@@ -4,10 +4,12 @@ const FeedbackButton = ({
   type,
   isActive,
   count,
+  onClick,
 }: {
   type: string;
   isActive: boolean;
   count: number;
+  onClick: () => void;
 }) => {
   const icon = type === "like" ? <BiLike /> : <BiDislike />;
   const style_active = type === "like" ? "text-green-600" : "text-red-600";
@@ -15,6 +17,7 @@ const FeedbackButton = ({
   return (
     <div className="flex flex-col items-center">
       <button
+        onClick={onClick}
         className={`w-fit h-fit p-1 text-2xl ${
           isActive ? style_active : "text-neutral-600"
         }`}

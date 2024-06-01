@@ -15,6 +15,10 @@ const router = createBrowserRouter([
     errorElement: <p>Error</p>,
     children: [
       {
+        index: true,
+        element: <PageAuth />,
+      },
+      {
         path: "chat/",
         element: <RootChat />,
         children: [
@@ -37,10 +41,6 @@ const router = createBrowserRouter([
             element: <PageUsers />,
           },
         ],
-      },
-      {
-        path: "auth",
-        element: <PageAuth />,
       },
     ],
   },

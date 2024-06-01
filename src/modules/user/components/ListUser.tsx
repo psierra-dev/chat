@@ -2,26 +2,23 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { BiEnvelope, BiUserPin, BiUserPlus } from "react-icons/bi";
 import { useSelector } from "../../../hooks/useSelector";
-import { setUserInfo } from "../../../store/slices/listUserSlice";
-import { addUser } from "../../../store/slices/chatSlice";
 import { User } from "../../../types/types";
 import Avatar from "../../common/components/Avatar";
 import Chip from "../../common/components/Chip";
 import Status from "../../common/components/Status";
+import { addUserToChat, setUserInfo } from "../../../store/slices/chatSlice";
 
 const ItemUser = ({ user }: { user: User }) => {
   const dispatch = useDispatch();
-  const selected_user = useSelector(
-    (state) => state.listUsers.value.selectedUser
-  );
+  const userId = useSelector((state) => state.chat.value.selectedUsetInfo);
   const navigate = useNavigate();
 
   const handleSelectUser = () => {
-    dispatch(setUserInfo(user));
+    dispatch(setUserInfo(user.id));
   };
 
   const handleSelectChatUser = () => {
-    dispatch(addUser(user));
+    dispatch(addUserToChat(user));
     navigate(`/chat/${user.username}`);
   };
   return (
@@ -49,9 +46,7 @@ const ItemUser = ({ user }: { user: User }) => {
           <button
             onClick={handleSelectUser}
             className={`${
-              selected_user?.id === user.id
-                ? "text-green-900"
-                : "text-neutral-900"
+              userId === user.id ? "text-green-900" : "text-neutral-900"
             }  text-lg hover:scale-125 font-semibold w-fit h-fit`}
           >
             <BiUserPin />

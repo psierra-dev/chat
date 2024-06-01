@@ -4,8 +4,10 @@ import Input from "../../common/components/Input";
 import ListUser from "./ListUser";
 
 const FilterableUserList = () => {
-  const users = useSelector((state) => state.listUsers.value.users);
-  const currentUser = useSelector((state) => state.user.value.currentUser);
+  const users = useSelector((state) => state.chat.value.allUsers);
+  const currentUser = useSelector(
+    (state) => state.chat.value.currentUser
+  ) as User;
 
   const filteredUser = users?.filter((u) => {
     for (const interest of currentUser.interests) {

@@ -16,7 +16,7 @@ const Input = ({ name, label_text, placeholder, onChange, icon }: Props) => {
   return (
     <div className=" flex flex-col">
       <label className=" text-sm  text-neutral-900">{label_text}</label>
-      <div className="flex items-center p-2 mt-2 border-[1px] border-neutral-300 bg-white rounded-md">
+      <div className="flex items-center p-2 mt-2 border-[1px] border-neutral-300  rounded-md bg-neutral-100">
         {IconComponent}
 
         <input
@@ -24,7 +24,7 @@ const Input = ({ name, label_text, placeholder, onChange, icon }: Props) => {
           name={name}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full ml-1 border-none active:border-none focus:border-none focus-visible:border-none focus-visible:outline-none text-neutral-800 text-base placeholder:text-sm md:placeholder:text-base"
+          className="w-full ml-1 bg-neutral-100 border-none active:border-none focus:border-none focus-visible:border-none focus-visible:outline-none text-neutral-800 text-base placeholder:text-sm md:placeholder:text-base"
         />
       </div>
     </div>
