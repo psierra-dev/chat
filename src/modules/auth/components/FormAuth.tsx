@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 import socket from "../../../libs/socket";
 import Input from "../../common/components/Input";
 import { BiLoader } from "react-icons/bi";
 import interests from "../../../consts/interests.json";
 import Chip from "../../common/components/Chip";
+
 const apiUrl = import.meta.env.VITE_APP_API_URL as string;
 type Status = "typing" | "loading" | "success" | "error";
 const FormAuth = () => {
@@ -24,13 +27,7 @@ const FormAuth = () => {
     setStatus("loading");
 
     try {
-      const resp = await fetch(`${apiUrl}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const resp = await axios.post(`${apiUrl}/login`, data);
 
       console.log(resp);
       if (resp.status === 200) {
