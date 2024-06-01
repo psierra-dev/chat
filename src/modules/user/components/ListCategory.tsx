@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
 import Chip from "../../common/components/Chip";
-import { updateInterests } from "../../../store/slices/userSlice";
+
 import { useSelector } from "../../../hooks/useSelector";
+import { updateInterests } from "../../../store/slices/chatSlice";
 
 const interests = [
   "Leer",
