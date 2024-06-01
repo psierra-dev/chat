@@ -23,7 +23,12 @@ const FormAuth = () => {
 
   async function handleSubmitUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!data.username || data.interests.length === 0) return;
+    if (
+      !data.username ||
+      data.interests.length === 0 ||
+      data.biography.length === 0
+    )
+      return;
     setStatus("loading");
 
     try {
@@ -49,7 +54,7 @@ const FormAuth = () => {
   return (
     <div className=" w-full max-w-[500px] md:max-w-[600px]  md:border-[1px] border-neutral-300 rounded-r-lg p-3 md:p-6">
       <h4 className=" text-center text-neutral-900 text-3xl md:text-4xl font-semibold font-sans">
-        FastChat
+        Pendeja
       </h4>
       <form onSubmit={handleSubmitUser} className=" flex flex-col gap-2 mt-4">
         <Input
