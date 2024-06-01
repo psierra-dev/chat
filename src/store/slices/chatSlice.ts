@@ -9,7 +9,7 @@ interface ChatState {
     value: {
         currentUser: User | null,
         allUsers: User[],
-        selectedUsetInfo: string | null,
+        selectedUsetInfo: string | number,
         chatUsers: UserChat[], 
     }
 }
@@ -18,7 +18,7 @@ const initialState: ChatState = {
     value: {
         currentUser: null,
         allUsers: [],
-        selectedUsetInfo: null,
+        selectedUsetInfo: "",
         chatUsers: [],
     }
 }
