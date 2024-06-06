@@ -29,9 +29,12 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
   return (
     <div className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded shadow-md" ref={modalRef}>
+      <div
+        className="bg-white dark:bg-slate-900 p-6 rounded shadow-md"
+        ref={modalRef}
+      >
         <button
-          className="absolute text-lg hover:bg-neutral-200 rounded-full  top-2 right-2"
+          className="absolute dark:text-white text-lg hover:bg-neutral-200 dark:hover:bg-slate-800  rounded-full  top-2 right-2"
           onClick={(e) => {
             e.stopPropagation();
             onClose();

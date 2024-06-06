@@ -5,13 +5,13 @@ import FeedbackButton from "../../common/components/FeedbackButton";
 import useFeedback from "../../../hooks/useFeedback";
 
 const InfoUser = ({ user }: { user: User }) => {
-  const { isDisLike, isLike, onDisLike, onLike } = useFeedback(user);
+  const { isDisLike, isLike } = useFeedback(user);
 
   return (
     <div className="flex flex-col items-center justify-center">
       <div className=" flex flex-col items-center">
         <Avatar username={user?.username} size={"md"} />
-        <span className=" text-base font-semibold text-neutral-900">
+        <span className=" text-base font-semibold text-neutral-900 dark:text-neutral-50">
           {user.username}
         </span>
 
@@ -22,20 +22,20 @@ const InfoUser = ({ user }: { user: User }) => {
       <div className=" w-full mt-2">
         <div className="flex w-full justify-center gap-2">
           <FeedbackButton
-            onClick={onLike}
+            onClick={() => null}
             type="like"
             isActive={isLike}
             count={user.like.length}
           />
           <FeedbackButton
-            onClick={onDisLike}
+            onClick={() => null}
             type="deslike"
             isActive={isDisLike}
             count={user.dislike.length}
           />
         </div>
       </div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 mt-2">
         {user.interests.map((interest) => (
           <Chip key={interest} text={interest} />
         ))}

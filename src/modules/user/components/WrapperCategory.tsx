@@ -11,7 +11,9 @@ const WrapperCategory = () => {
   return (
     <div className="flex flex-col w-full">
       <div className=" mb-2">
-        <h3 className="text-base font-semibold text-neutral-900">Categoria</h3>
+        <h3 className="text-base font-semibold text-neutral-900 dark:text-white">
+          Intereses
+        </h3>
       </div>
       <div className=" w-full flex items-center gap-2">
         <div className="w-full h-12 flex gap-1 px-2 items-center shadow-inner rounded-md">

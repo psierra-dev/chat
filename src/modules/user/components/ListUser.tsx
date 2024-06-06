@@ -6,7 +6,11 @@ import { User } from "../../../types/types";
 import Avatar from "../../common/components/Avatar";
 import Chip from "../../common/components/Chip";
 import Status from "../../common/components/Status";
-import { addUserToChat, setUserInfo } from "../../../store/slices/chatSlice";
+import {
+  addUserToChat,
+  setUserChat,
+  setUserInfo,
+} from "../../../store/slices/chatSlice";
 
 const ItemUser = ({ user }: { user: User }) => {
   const dispatch = useDispatch();
@@ -19,6 +23,7 @@ const ItemUser = ({ user }: { user: User }) => {
 
   const handleSelectChatUser = () => {
     dispatch(addUserToChat(user));
+    dispatch(setUserChat(user.userId));
     navigate(`/chat/${user.username}`);
   };
   return (
@@ -27,7 +32,7 @@ const ItemUser = ({ user }: { user: User }) => {
         <div className="flex items-center">
           <Avatar username={user.username} />
           <p
-            className={`mx-1 md:mx-2 text-blue-500  text-xs md:text-sm  font-medium`}
+            className={`mx-1 md:mx-2 text-blue-500 dark:text-blue-400 text-xs md:text-sm  font-medium`}
           >
             {user.username}
           </p>
@@ -40,13 +45,15 @@ const ItemUser = ({ user }: { user: User }) => {
           >
             <BiEnvelope />
           </button>
-          <button className="text-neutral-900 text-lg hover:scale-125 font-semibold w-fit h-fit">
+          <button className="text-neutral-900 dark:text-neutral-50 text-lg hover:scale-125 font-semibold w-fit h-fit">
             <BiUserPlus />
           </button>
           <button
             onClick={handleSelectUser}
             className={`${
-              userId === user.id ? "text-green-900" : "text-neutral-900"
+              userId === user.id
+                ? "text-green-900"
+                : "text-neutral-900 dark:text-neutral-50"
             }  text-lg hover:scale-125 font-semibold w-fit h-fit`}
           >
             <BiUserPin />

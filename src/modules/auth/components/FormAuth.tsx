@@ -52,9 +52,9 @@ const FormAuth = () => {
   }
 
   return (
-    <div className=" w-full max-w-[500px] md:max-w-[600px]  md:border-[1px] border-neutral-300 rounded-r-lg p-3 md:p-6">
-      <h4 className=" text-center text-neutral-900 text-3xl md:text-4xl font-semibold font-sans">
-        Pendeja
+    <div className=" w-full max-w-[500px] md:max-w-[600px]  md:border-[1px] border-neutral-300 dark:border-slate-900 dark:bg-slate-950 text-neutral-900 dark:text-neutral-50 rounded-r-lg p-3 md:p-6">
+      <h4 className=" text-center  text-3xl md:text-4xl font-semibold font-sans">
+        Chat Fast
       </h4>
       <form onSubmit={handleSubmitUser} className=" flex flex-col gap-2 mt-4">
         <Input
@@ -69,19 +69,19 @@ const FormAuth = () => {
           }}
           icon="user"
         />
-        <div className=" flex flex-col">
-          <label className="text-sm  text-neutral-900">Bio</label>
+        <div className=" flex flex-col gap-1">
+          <label className="text-sm">Bio</label>
           <textarea
             name="biography"
             onChange={(e) => setData({ ...data, biography: e.target.value })}
-            className="w-full p-2 border-[1px] bg-neutral-100  text-neutral-800 text-base placeholder:text-sm md:placeholder:text-base rounded-md"
+            className="w-full p-2 border-[1px] bg-neutral-100 dark:bg-slate-700 dark:text-white  text-neutral-800 text-base placeholder:text-sm md:placeholder:text-base rounded-md"
           ></textarea>
         </div>
 
         <div className="flex flex-col">
           <div className="mb-2">
-            <h5 className="text-sm  text-neutral-900">Intereses</h5>
-            <p className=" text-xs font-semibold text-neutral-600">
+            <label className="text-sm  ">Intereses</label>
+            <p className=" text-xs font-semibold text-neutral-600 dark:text-neutral-500">
               Elija como maximo 5 interes.
             </p>
           </div>

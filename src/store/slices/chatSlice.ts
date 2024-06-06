@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { Message, User } from "../../types/types"
+import { getMessagesOfUser } from "../../utils/sessionStorageMessage"
 
 interface UserChat extends User {
     messages: Message[]
@@ -10,7 +11,8 @@ interface ChatState {
         currentUser: User | null,
         allUsers: User[],
         selectedUsetInfo: string | number,
-        chatUsers: UserChat[], 
+        chatUsers: UserChat[],
+        selectedUsetChat: string | number, 
     }
 }
 
@@ -20,6 +22,7 @@ const initialState: ChatState = {
         allUsers: [],
         selectedUsetInfo: "",
         chatUsers: [],
+        selectedUsetChat: "",
     }
 }
 
@@ -64,12 +67,20 @@ export const chatSlice = createSlice({
             }
         },
         addUser: (state, action) => {
+            const isAdded = state.value.allUsers.some(user => user.userId === action.payload.userId)
+            if(isAdded) return
             state.value.allUsers?.push(action.payload)
+
+            const indexUser = state.value.chatUsers.findIndex(user => user.userId === action.payload.userId)
+
+            if(indexUser !== -1) {
+                state.value.chatUsers[indexUser].online = true
+            }
         },
         updateUser: (state, action) => {
             const userUpdate: User = action.payload
-            const indexAllUser = state.value.allUsers.findIndex(user => user.id === userUpdate.id)
-            const indexChatUser = state.value.chatUsers.findIndex(user => user.id === userUpdate.id)
+            const indexAllUser = state.value.allUsers.findIndex(user => user.userId === userUpdate.userId)
+            const indexChatUser = state.value.chatUsers.findIndex(user => user.userId === userUpdate.userId)
 
             if(indexAllUser !== -1) {
                 state.value.allUsers[indexAllUser] = userUpdate
@@ -82,9 +93,9 @@ export const chatSlice = createSlice({
         },
         deleteUser: (state, action) => {
             const userId = action.payload
-            state.value.allUsers = state.value.allUsers.filter(user => user.id !== userId)
+            state.value.allUsers = state.value.allUsers.filter(user => user.userId !== userId)
             
-            const indexUser = state.value.chatUsers.findIndex(user => user.id === userId)
+            const indexUser = state.value.chatUsers.findIndex(user => user.userId === userId)
 
             if(indexUser !== -1) {
                 state.value.chatUsers[indexUser].online = false
@@ -98,33 +109,53 @@ export const chatSlice = createSlice({
             state.value.selectedUsetInfo = action.payload
         },
         addUserToChat(state, action) {
-            const isAdded = state.value.chatUsers.some((u) => action.payload.id === u.id)
+            const isAdded = state.value.chatUsers.some((u) => action.payload.userId === u.userId)
             if(isAdded) return
 
-            state.value.chatUsers.push({...action.payload, messages: []})
+            const messages = getMessagesOfUser(action.payload.username, action.payload.userId) || []
+
+
+            state.value.chatUsers.push({...action.payload, messages})
+        },
+        setUserChat: (state, action) => {
+            state.value.selectedUsetChat = action.payload
         },
         deleteUserOfChat(state, action) {
             const userId = action.payload
-            state.value.chatUsers = state.value.chatUsers.filter(user => user.id !== userId)
+            state.value.chatUsers = state.value.chatUsers.filter(user => user.userId !== userId)
         },
         addMessageToUser(state, action) {
             const newMessage: Message = action.payload
             const id = newMessage.self ? newMessage.toId : newMessage.fromId
            
-            const indexUser = state.value.chatUsers.findIndex(u => u.id === id)
+            const indexUser = state.value.chatUsers.findIndex(u => u.userId === id)
 
             if(indexUser !== -1) {
                 state.value.chatUsers[indexUser].messages.push(newMessage)
             } else {
                 const senderUser = newMessage.sender as User
                 const newUser = {...senderUser, messages: []}
-                console.log(newUser, '--newUser')
                 state.value.chatUsers.push(newUser)
                
                 const lastIndex = state.value.chatUsers.length - 1
                 
 
                 state.value.chatUsers[lastIndex].messages.push(newMessage)
+            }
+        },
+        readMessages(state, action) {
+            const indexUser = state.value.chatUsers.findIndex(user => user.username === action.payload )
+            
+            if(indexUser !== -1) {
+               state.value.chatUsers[indexUser].messages = state.value.chatUsers[indexUser]?.messages?.map(message => {
+                    if(!message.read) {
+                        return {
+                            ...message,
+                            read: true
+                        }
+                    }
+                    return message
+                })
             }
         }
 
@@ -133,8 +164,10 @@ export const chatSlice = createSlice({
 
 export const { 
     addUserToChat,
-    deleteUserOfChat, 
-    addMessageToUser, 
+    deleteUserOfChat,
+    setUserChat, 
+    addMessageToUser,
+    readMessages, 
     addUser,
     updateUser,
     deleteUser, 

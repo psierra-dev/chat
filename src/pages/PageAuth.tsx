@@ -2,7 +2,7 @@ import FormAuth from "../modules/auth/components/FormAuth";
 
 const PageAuth = () => {
   return (
-    <div className="flex flex-col flex-1 min-h-screen">
+    <div className="flex flex-col flex-1 min-h-screen bg-white dark:bg-slate-950">
       <main className="flex flex-1 justify-center items-center">
         <section className="flex w-full md:px-10 lg:px-24 xl:px-80">
           <div className="w-1/2 hidden md:block">

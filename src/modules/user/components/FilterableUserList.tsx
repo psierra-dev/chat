@@ -9,13 +9,15 @@ const FilterableUserList = () => {
     (state) => state.chat.value.currentUser
   ) as User;
 
-  const filteredUser = users?.filter((u) => {
-    for (const interest of currentUser.interests) {
-      if (u.interests?.includes(interest)) {
-        return true;
-      }
-    }
-  });
+  const filteredUser = currentUser
+    ? users?.filter((u) => {
+        for (const interest of currentUser.interests) {
+          if (u.interests?.includes(interest)) {
+            return true;
+          }
+        }
+      })
+    : [];
 
   return (
     <section className=" flex flex-col p-2 md:p-4 flex-1 overflow-auto">

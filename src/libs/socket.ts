@@ -7,6 +7,7 @@ interface ServerToClientEvents {
   'user:disconnected': (userId: string | number) => void
   'user:all': (users: User[]) => void
   'user:update': (user: User) => void
+  'user:session': (user : User) => void
   'message:private': ( message: Message ) => void;
   
 }
@@ -15,6 +16,7 @@ interface ClientToServerEvents {
   'message:private': ( message: Message ) => void;
   'user:like': (userId: string | number, callback: (res:{ status: "ok" |  "nok", user?: User }) => void ) => void;
   'user:dislike': (userId: string | number, callback: (res:{ status: "ok" |  "nok", user?: User }) => void ) => void;
+  'user:delete': () => void
 }
 
 const apiUrl = import.meta.env.VITE_APP_API_URL as string;
