@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -21,6 +21,12 @@ const FormAuth = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      navigate("/chat");
+    });
+  }, []);
+
   async function handleSubmitUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (
@@ -39,10 +45,7 @@ const FormAuth = () => {
         socket.auth = data;
         socket.connect();
         setStatus("success");
-        navigate("/chat");
-      } else if (resp.status === 400) {
-        setStatus("error");
-        setError("Username en uso");
+        //navigate("/chat");
       }
     } catch (error) {
       setStatus("error");

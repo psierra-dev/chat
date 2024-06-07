@@ -33,23 +33,20 @@ export const chatSlice = createSlice({
         setCurrentUser: (state, action) => {
             state.value.currentUser = action.payload
         },
-        updateInterests: (state, action) => {
-            const interest = action.payload
-            let user_interest = state.value.currentUser?.interests
-
-            if(user_interest && user_interest.includes(interest)) {
-                user_interest = user_interest.filter(int => int !== interest)
-            } else {
-                if(user_interest && user_interest.length < 4) {
-                    user_interest = [...user_interest, interest]
-                }
+        logout: (state) => {
+            state.value =  {
+                currentUser: null,
+                allUsers: [],
+                selectedUsetInfo: "",
+                chatUsers: [],
+                selectedUsetChat: "",
             }
-
-
-            state.value.currentUser = {
-                ...state.value.currentUser,
-                interests: user_interest as string[]
-            } as User
+        },
+        updateInterests: (state, action) => {
+            const interests = action.payload
+            if(state.value.currentUser ) {
+                state.value.currentUser.interests = interests
+            }
         },
         updateLikeOrDislike(state, action) {
             const userId = action.payload.userId
@@ -164,6 +161,7 @@ export const chatSlice = createSlice({
 
 export const { 
     addUserToChat,
+    logout,
     deleteUserOfChat,
     setUserChat, 
     addMessageToUser,

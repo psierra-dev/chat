@@ -7,8 +7,12 @@ const useFeedback = (user: User) => {
   console.log(user);
   const currentUser = useSelector((state) => state.chat.value.currentUser);
 
-  const isLike = user.like.includes(currentUser?.id as string);
-  const isDisLike = user.dislike.includes(currentUser?.id as string);
+  const isLike = user.like
+    ? user?.like?.includes(currentUser?.id as string)
+    : false;
+  const isDisLike = user.dislike
+    ? user?.dislike?.includes(currentUser?.id as string)
+    : false;
 
   const like = () => {
     socket.emit("user:like", user.id, (res) => {

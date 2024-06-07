@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom";
 import socket from "../../../libs/socket";
 import ClickOutsideComponent from "./ClickOutsideComponent";
 import MenuTheme from "./MenuTheme";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../store/slices/chatSlice";
 
 const ControlPanel = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [showThemeChange, setShowThemeChange] = useState(false);
 
@@ -45,13 +48,14 @@ const ControlPanel = () => {
         onClick={() => {
           sessionStorage.removeItem("currentUser");
           socket.disconnect();
-          navigate("/");
+          dispatch(logout());
+          navigate("/", { replace: true });
         }}
       >
         <span className=" text-xl font-medium">
           <BiLogOut />
         </span>
-        <button className=" text-base font-medium">Cerrar sesion</button>
+        <span className=" text-base font-medium">Cerrar sesion</span>
       </button>
     </section>
   );

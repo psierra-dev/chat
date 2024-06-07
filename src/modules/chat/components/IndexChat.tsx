@@ -6,7 +6,7 @@ const IndexChat = () => {
       <span className="text-5xl font-semibold text-blue-600">
         <BiMessage />
       </span>
-      <h3 className=" text-base md:text-lg font-semibold text-neutral-700">
+      <h3 className=" text-base md:text-lg font-semibold text-neutral-600 dark:text-slate-600">
         Busca un usuario para empezar a chatear
       </h3>
     </section>

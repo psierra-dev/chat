@@ -34,7 +34,7 @@ const CardMenuTheme = ({
 const MenuTheme = () => {
   const { theme, changeTheme } = useTheme();
   return (
-    <div className=" w-[140px] bg-white dark:bg-slate-900 dark:text-white absolute left-0 md:right-0 top-10 md:bottom-10 py-2 shadow-md rounded-md z-20">
+    <div className=" w-[140px] bg-white dark:bg-slate-900 dark:text-white absolute left-0 lg:left-auto lg:right-0 top-10 lg:top-auto lg:bottom-10 py-2 shadow-md rounded-md z-20">
       <CardMenuTheme
         type="Light"
         isActive={theme === "light"}

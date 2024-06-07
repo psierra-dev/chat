@@ -23,8 +23,6 @@ const HeaderMessage = ({ user }: { user: User }) => {
     navigate("/chat");
   };
 
-  console.log(showModal, "showModal");
-
   return (
     <header className="flex justify-between rounded-t-xl items-center w-full p-3 bg-transparent border-b-[1px] border-blue-100 dark:border-slate-900">
       <div className="flex items-center">
@@ -58,7 +56,7 @@ const HeaderMessage = ({ user }: { user: User }) => {
               }
             }}
           >
-            <div className=" w-[170px] bg-white dark:bg-slate-900 absolute right-2 top-5 py-2 shadow-md rounded-sm z-20">
+            <div className=" w-[170px] bg-white dark:bg-slate-900 absolute right-2 top-11 py-2 shadow-md rounded-sm z-20">
               <>
                 <div
                   onClick={() => setShowModal(true)}

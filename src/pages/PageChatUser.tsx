@@ -51,7 +51,13 @@ const PageChatUser = () => {
     <div className="flex flex-col flex-1 rounded-md  overflow-auto">
       <HeaderMessage user={user[0] as User} />
       <ViewMessage messages={messages} />
-      <InputMessage onSendMessage={onSendMessage} />
+      {user[0].online ? (
+        <InputMessage onSendMessage={onSendMessage} />
+      ) : (
+        <div className=" flex justify-center items-center h-10 bg-red-400">
+          <p className="text-red-600 font-semibold">Usuario desconectado</p>
+        </div>
+      )}
     </div>
   );
 };

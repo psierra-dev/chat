@@ -68,7 +68,7 @@ const InputMessage = ({
                 }
               }}
             >
-              <div className=" absolute bottom-12">
+              <div className=" absolute left-0 bottom-12">
                 <EmojiPicker onSelect={insertEmoji} />
               </div>
             </ClickOutsideComponent>

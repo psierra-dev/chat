@@ -12,11 +12,11 @@ const InfoUser = ({ user }: { user: User }) => {
       <div className=" flex flex-col items-center">
         <Avatar username={user?.username} size={"md"} />
         <span className=" text-base font-semibold text-neutral-900 dark:text-neutral-50">
-          {user.username}
+          {user?.username}
         </span>
 
         <p className=" text-sm text-center font-medium text-neutral-500 mt-1">
-          {user.biography}
+          {user?.biography}
         </p>
       </div>
       <div className=" w-full mt-2">
@@ -25,18 +25,18 @@ const InfoUser = ({ user }: { user: User }) => {
             onClick={() => null}
             type="like"
             isActive={isLike}
-            count={user.like.length}
+            count={0}
           />
           <FeedbackButton
             onClick={() => null}
             type="deslike"
             isActive={isDisLike}
-            count={user.dislike.length}
+            count={0}
           />
         </div>
       </div>
       <div className="flex gap-1 mt-2">
-        {user.interests.map((interest) => (
+        {user?.interests.map((interest) => (
           <Chip key={interest} text={interest} />
         ))}
       </div>

@@ -15,13 +15,23 @@ import {
 const ItemUser = ({ user }: { user: User }) => {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.chat.value.selectedUsetInfo);
+  const usersChat = useSelector((state) => state.chat.value.chatUsers);
   const navigate = useNavigate();
 
-  const handleSelectUser = () => {
+  const isTalking = usersChat?.some(
+    (userChat) => userChat.userId === user.userId
+  );
+
+  const handleSelectInfoUser = () => {
     dispatch(setUserInfo(user.id));
   };
 
   const handleSelectChatUser = () => {
+    if (isTalking) return;
+    dispatch(addUserToChat(user));
+  };
+
+  const handleSelectChatUserMessage = () => {
     dispatch(addUserToChat(user));
     dispatch(setUserChat(user.userId));
     navigate(`/chat/${user.username}`);
@@ -40,21 +50,28 @@ const ItemUser = ({ user }: { user: User }) => {
         </div>
         <div className="flex gap-2">
           <button
-            onClick={handleSelectChatUser}
+            onClick={handleSelectChatUserMessage}
             className="text-blue-500 text-lg hover:scale-125 font-semibold w-fit h-fit"
           >
             <BiEnvelope />
           </button>
-          <button className="text-neutral-900 dark:text-neutral-50 text-lg hover:scale-125 font-semibold w-fit h-fit">
+          <button
+            className={`${
+              isTalking
+                ? "text-green-900"
+                : "text-neutral-900 dark:text-neutral-50"
+            }  text-lg hover:scale-125 font-semibold w-fit h-fit`}
+            onClick={handleSelectChatUser}
+          >
             <BiUserPlus />
           </button>
           <button
-            onClick={handleSelectUser}
             className={`${
               userId === user.id
                 ? "text-green-900"
                 : "text-neutral-900 dark:text-neutral-50"
             }  text-lg hover:scale-125 font-semibold w-fit h-fit`}
+            onClick={handleSelectInfoUser}
           >
             <BiUserPin />
           </button>

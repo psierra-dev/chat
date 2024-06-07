@@ -26,7 +26,7 @@ const Input = ({ name, label_text, placeholder, onChange, icon }: Props) => {
           name={name}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full ml-1 bg-transparent  border-none active:border-none focus:border-none focus-visible:border-none focus-visible:outline-none text-neutral-800 dark:text-white text-base placeholder:text-sm md:placeholder:text-base"
+          className="w-full ml-1 bg-transparent hover:bg-transparent focus:bg-transparent active:bg-transparent  border-none active:border-none focus:border-none focus-visible:border-none focus-visible:outline-none text-neutral-800 dark:text-white text-base placeholder:text-sm md:placeholder:text-base"
         />
       </div>
     </div>
