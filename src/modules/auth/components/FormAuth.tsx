@@ -25,7 +25,7 @@ const FormAuth = () => {
     socket.on("connect", () => {
       navigate("/chat");
     });
-  }, []);
+  }, [navigate]);
 
   async function handleSubmitUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,7 +44,7 @@ const FormAuth = () => {
       if (resp.status === 200) {
         socket.auth = data;
         socket.connect();
-        setStatus("success");
+        //setStatus("success");
         //navigate("/chat");
       }
     } catch (error) {

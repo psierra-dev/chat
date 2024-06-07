@@ -51,7 +51,7 @@ const PageChatUser = () => {
     <div className="flex flex-col flex-1 rounded-md  overflow-auto">
       <HeaderMessage user={user[0] as User} />
       <ViewMessage messages={messages} />
-      {user[0].online ? (
+      {user.length > 0 && user[0]?.online ? (
         <InputMessage onSendMessage={onSendMessage} />
       ) : (
         <div className=" flex justify-center items-center h-10 bg-red-400">

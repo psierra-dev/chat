@@ -49,7 +49,6 @@ const ListUser = () => {
   );
   const dispatch = useDispatch();
 
-  console.log(users, "chatUsers");
   return (
     <div className=" my-2 md:my-4 lg:flex-1 overflow-y-auto">
       <ul className=" flex lg:flex-col gap-1">
