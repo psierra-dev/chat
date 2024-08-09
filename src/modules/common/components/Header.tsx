@@ -1,34 +1,34 @@
-import { createPortal } from "react-dom";
-import { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { BiX } from "react-icons/bi";
-import { useSelector } from "../../../hooks/useSelector";
+import {createPortal} from "react-dom";
+import {useState} from "react";
+import {GiHamburgerMenu} from "react-icons/gi";
+import {BiX} from "react-icons/bi";
+import {useSelector} from "../../../hooks/useSelector";
 import Avatar from "./Avatar";
 import ControlPanel from "./ControlPanel";
 import InfoUser from "../../user/components/InfoUser";
-import { User } from "../../../types/types";
+import {User} from "../../../types/types";
+import IconButton from "./IconButton";
 
 const Header = () => {
   const user = useSelector((state) => state.chat.value.currentUser);
   const [menu, setMenu] = useState(false);
   return (
-    <header className=" h-12  p-2 md:px-32 flex items-center justify-between bg-white border-b-[1px] border-neutral-200 dark:bg-slate-950  dark:border-[#020f17]  fixed top-0 left-0 right-0">
-      <h1 className=" text-sm text-neutral-900 dark:text-neutral-50 font-semibold">
+    <header className=" h-12  p-2 md:px-20 xl:px-32 flex items-center justify-between bg-white border-b-[1px] border-neutral-200 dark:bg-slate-950  dark:border-[#020f17]  fixed top-0 left-0 right-0">
+      <span className=" text-sm text-neutral-900 dark:text-neutral-50 font-semibold">
         Chat Fast
-      </h1>
+      </span>
 
-      <div className=" hidden lg:block">
-        {user?.username && (
-          <Avatar username={user?.username as string} size="xs" />
-        )}
-      </div>
+      {user?.username && (
+        <Avatar
+          username={user?.username as string}
+          size="xs"
+          className=" hidden lg:flex"
+        />
+      )}
 
-      <button
-        className="block lg:hidden text-neutral-950 dark:text-white text-lg"
-        onClick={() => setMenu(!menu)}
-      >
+      <IconButton className="block lg:hidden" onClick={() => setMenu(!menu)}>
         {!menu ? <GiHamburgerMenu /> : <BiX />}
-      </button>
+      </IconButton>
 
       {menu &&
         createPortal(

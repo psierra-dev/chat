@@ -1,17 +1,18 @@
-import { useRef, useState } from "react";
-import { User } from "../../../types/types";
+import {useRef, useState} from "react";
+import {User} from "../../../types/types";
 import Avatar from "../../common/components/Avatar";
 import ClickOutsideComponent from "../../common/components/ClickOutsideComponent";
 import Status from "../../common/components/Status";
-import { BiDotsVertical } from "react-icons/bi";
-import { useDispatch } from "react-redux";
-import { deleteUserOfChat } from "../../../store/slices/chatSlice";
-import { useNavigate } from "react-router-dom";
-import { createPortal } from "react-dom";
+import {BiDotsVertical} from "react-icons/bi";
+import {useDispatch} from "react-redux";
+import {deleteUserOfChat} from "../../../store/slices/chatSlice";
+import {useNavigate} from "react-router-dom";
+import {createPortal} from "react-dom";
 import Modal from "../../common/components/Modal";
 import InfoUser from "../../user/components/InfoUser";
+import IconButton from "../../common/components/IconButton";
 
-const HeaderMessage = ({ user }: { user: User }) => {
+const HeaderMessage = ({user}: {user: User}) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -35,15 +36,14 @@ const HeaderMessage = ({ user }: { user: User }) => {
       </div>
 
       <div className="relative">
-        <button
+        <IconButton
           ref={buttonRef}
           onClick={() => {
             setShowMenu(!showMenu);
           }}
-          className="text-neutral-900 dark:text-neutral-50 text-xl w-fit p-1 rounded-full hover:bg-neutral-600 hover:bg-opacity-30"
         >
           <BiDotsVertical />
-        </button>
+        </IconButton>
         {showMenu && (
           <ClickOutsideComponent
             onClose={(event) => {

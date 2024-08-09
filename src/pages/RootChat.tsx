@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Outlet, useNavigate, useParams } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
+import {Outlet, useNavigate, useParams} from "react-router-dom";
 import socket from "../libs/socket";
 
 import {
@@ -13,15 +13,15 @@ import {
 } from "../store/slices/chatSlice";
 
 import Header from "../modules/common/components/Header";
-import { User } from "../types/types";
-import { addMessage } from "../utils/sessionStorageMessage";
-import { useSelector } from "../hooks/useSelector";
-import { BiLoader } from "react-icons/bi";
+import {User} from "../types/types";
+import {addMessage} from "../utils/sessionStorageMessage";
+import {useSelector} from "../hooks/useSelector";
+import {BiLoader} from "react-icons/bi";
 
 const RootChat = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { username } = useParams();
+  const {username} = useParams();
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state.chat.value.currentUser);
 
@@ -36,7 +36,7 @@ const RootChat = () => {
       } else if (socket.connected) {
         setLoading(true);
       } else {
-        navigate("/", { replace: true });
+        navigate("/", {replace: true});
       }
 
       socket.on("user:session", (data) => {
@@ -54,7 +54,7 @@ const RootChat = () => {
       let newMessage = message;
       const sender = message.sender as User;
       if (sender && sender.username === username) {
-        newMessage = { ...newMessage, read: true };
+        newMessage = {...newMessage, read: true};
       }
       addMessage(newMessage, sender.username, sender.userId);
       dispatch(addMessageToUser(newMessage));
@@ -92,7 +92,7 @@ const RootChat = () => {
   }, [dispatch]);
 
   return (
-    <div className=" w-screen bg-white dark:bg-slate-950 h-screen p-4 flex flex-col px-2 md:px-20 lg:px-32">
+    <div className=" w-screen bg-white dark:bg-slate-950 h-screen p-4 flex flex-col px-2 md:px-20 xl:px-32">
       <>
         <Header />
 

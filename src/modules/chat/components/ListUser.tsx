@@ -1,18 +1,12 @@
-import { UserChat } from "../../../types/types";
-import { NavLink } from "react-router-dom";
+import {UserChat} from "../../../types/types";
+import {NavLink} from "react-router-dom";
 import Avatar from "../../common/components/Avatar";
 import Status from "../../common/components/Status";
-import { useSelector } from "../../../hooks/useSelector";
-import { useDispatch } from "react-redux";
-import { setUserChat } from "../../../store/slices/chatSlice";
+import {useSelector} from "../../../hooks/useSelector";
+import {useDispatch} from "react-redux";
+import {setUserChat} from "../../../store/slices/chatSlice";
 
-const CardUser = ({
-  user,
-  isActive,
-}: {
-  user: UserChat;
-  isActive: boolean;
-}) => {
+const CardUser = ({user, isActive}: {user: UserChat; isActive: boolean}) => {
   const unreadMessages = user.messages.filter(
     (message) => !message.read
   ).length;
@@ -22,8 +16,8 @@ const CardUser = ({
       className={`m-1 flex justify-between items-center ${
         isActive
           ? "text-blue-700 dark:text-blue-600 bg-neutral-200 dark:bg-slate-900"
-          : "text-neutral-700"
-      }  hover:cursor-pointer p-2 rounded-lg`}
+          : "text-neutral-700 "
+      }  hover:cursor-pointer p-2 rounded-lg hover:bg-neutral-200 hover:dark:bg-slate-900`}
     >
       <div className="flex items-center">
         <Avatar username={user.username} />
@@ -61,7 +55,7 @@ const ListUser = () => {
             className=""
           >
             <NavLink to={`/chat/${u.username}`}>
-              {({ isActive }) => (
+              {({isActive}) => (
                 <CardUser
                   user={u}
                   isActive={isActive && u.userId === userSelected}

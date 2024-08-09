@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { BiHappy, BiSend } from "react-icons/bi";
+import {useRef, useState} from "react";
+import {BiHappy, BiSend} from "react-icons/bi";
 
 import EmojiPicker from "../../common/components/EmojiPicker";
 import ClickOutsideComponent from "../../common/components/ClickOutsideComponent";
@@ -24,7 +24,7 @@ const InputMessage = ({
 
   const insertEmoji = (emoji: string) => {
     if (inputRef.current) {
-      const { selectionStart, selectionEnd } = inputRef.current;
+      const {selectionStart, selectionEnd} = inputRef.current;
       if (selectionStart !== null && selectionEnd !== null) {
         const newMessage =
           message.slice(0, selectionStart) +
@@ -87,7 +87,7 @@ const InputMessage = ({
           <button
             disabled={message.length === 0}
             type="submit"
-            className="flex justify-center items-center bg-blue-500  hover:bg-blue-600 disabled:bg-blue-400 w-8 h-8 md:w-10 md:h-10 rounded-full text-center p-2 text-white text-base  md:text-xl font-semibold"
+            className="flex justify-center items-center bg-blue-500  hover:bg-blue-600 hover:scale-105 disabled:bg-blue-400 w-8 h-8 md:w-10 md:h-10 rounded-full text-center p-2 text-white text-base  md:text-xl font-semibold"
           >
             <BiSend />
           </button>

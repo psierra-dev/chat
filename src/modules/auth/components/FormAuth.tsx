@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 import socket from "../../../libs/socket";
 import Input from "../../common/components/Input";
-import { BiLoader } from "react-icons/bi";
+import {BiLoader} from "react-icons/bi";
 import interests from "../../../consts/interests.json";
 import Chip from "../../common/components/Chip";
 
@@ -44,8 +44,6 @@ const FormAuth = () => {
       if (resp.status === 200) {
         socket.auth = data;
         socket.connect();
-        //setStatus("success");
-        //navigate("/chat");
       }
     } catch (error) {
       setStatus("error");
@@ -68,7 +66,7 @@ const FormAuth = () => {
               setStatus("typing");
               setError("");
             }
-            setData({ ...data, username: e.target.value });
+            setData({...data, username: e.target.value});
           }}
           icon="user"
         />
@@ -76,7 +74,7 @@ const FormAuth = () => {
           <label className="text-sm">Bio</label>
           <textarea
             name="biography"
-            onChange={(e) => setData({ ...data, biography: e.target.value })}
+            onChange={(e) => setData({...data, biography: e.target.value})}
             className="w-full p-2 border-[1px] bg-neutral-100 dark:bg-slate-700 dark:text-white  text-neutral-800 text-base placeholder:text-sm md:placeholder:text-base rounded-md"
           ></textarea>
         </div>

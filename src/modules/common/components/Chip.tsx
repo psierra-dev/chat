@@ -1,7 +1,7 @@
-const Chip = ({ text, isActive }: { text: string; isActive?: boolean }) => {
+const Chip = ({text, isActive}: {text: string; isActive?: boolean}) => {
   const style_active = isActive
-    ? "bg-blue-600 text-white"
-    : "bg-white dark:bg-slate-800 text-neutral-700 dark:text-white";
+    ? "bg-blue-600 hover:bg-blue-500 text-white"
+    : "bg-white dark:bg-slate-800 hover:bg-blue-500 text-neutral-700 dark:text-white";
 
   return (
     <div
