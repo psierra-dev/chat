@@ -14,6 +14,7 @@ Chat usando websocket
 
 - Reactjs
 - Express
+- Socket
 
 ## Estado del Proyecto
 [Chat](https://chat-taupe-three-84.vercel.app)
