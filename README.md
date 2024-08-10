@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# Chat
+ 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tabla de Contenidos
 
-Currently, two official plugins are available:
+- [Descripción](#descripción)
+- [Tecnologías Usadas](#tecnologías-usadas)
+- [Estado del proyecto](#estado-del-proyecto)
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Chat usando websocket
 
-## Expanding the ESLint configuration
+## Tecnologías Usadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Reactjs
+- Express
 
-- Configure the top-level `parserOptions` property like this:
+## Estado del Proyecto
+[Chat](https://chat-taupe-three-84.vercel.app)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## API
+[Api-chat](https://github.com/psierra-dev/chat-back)
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+![chat](https://github.com/user-attachments/assets/56a68c34-c675-4227-a3c0-2b93529eada5)
